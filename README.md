@@ -19,7 +19,8 @@ The home page provides an overview of the application and a link to the video do
 ### Video Downloader Page
 This page allows users to input a YouTube URL, select start time, specify a range, and choose to either download the video or fetch its transcript.
 
-![Video Downloader Page](downloader/static/images/Screenshot%20downloader%20video.png)
+![Home Page](downloader/static/images/Screenshot%20video-downloader.png)
+
 
 ## Installation
 
