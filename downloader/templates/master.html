@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  
+  <link rel="stylesheet" href="../static/globalstyles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{% static 'images/youtubedownloader_logo_320.png' %}" alt="YouTube Downloader Logo" style="border-radius: 35px; height: 60px;">
+    </div>
+    <nav>
+        <span><a href="/">Home</a></span>
+        <span><a href="/video-downloader">Download Video</a></span>
+        <span><a href="#">Contact</a></span>
+    </nav>
+  </header>
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
+{% comment %} <link rel="stylesheet" href="{% static 'globalstyles.css' %}"> {% endcomment %}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        label {
+            color:rgb(93, 93, 93);
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #0073e6;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0073e6;
+        }
+
+        .form-container label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .form-container div  {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .form-container div label {
+            width: 100%;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #0073e6;
+            color: #ffffff;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #005bb5;
+        }
+
+        .preview-container {
+            flex: 2;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-container img {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .preview-container iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .preview-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .preview-container p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .preview-container a {
+            display: inline-block;
+            font-size: 1rem;
+            color: #0073e6;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .preview-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="./download_form.js" defer></script>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">YouTube Downloader</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1>Download Video</h1>
+
+            <form action="/handle-form/" method="POST" onsubmit="submitForm(event)">
+                {% csrf_token %}
+                <label for="url">YouTube URL:</label>
+                <input type="text" name="url" id="url" required>
+            
+                <label for="time_start">Start Time (MM:SS):</label>
+                <input type="text" name="time_start" id="time_start" value="0:00" required>
+            
+                <label for="time_range">Time Range (seconds):</label>
+                <select name="time_range" id="time_range">
+                    <option value="0">Full Video</option>
+                    <option value="30">30 seconds</option>
+                    <option value="60">60 seconds</option>
+                    <option value="90">90 seconds</option>
+                    <option value="120">120 seconds</option>
+                    <option value="150">150 seconds</option>
+                    <option value="180">180 seconds</option>
+                    <option value="240">240 seconds</option>
+                    <option value="300">300 seconds</option>
+                </select>
+                
+                <hr/>
+
+                <div>
+                    <label>Download Video</label>
+                    <input type="radio" name="action" value="download" onclick="setActionValue(event)"/>
+                </div>
+                <div>    
+                    <label>Fetch Transcript</label>
+                    <input type="radio" name="action" value="transcript" onclick="setActionValue(event)"/>
+                </div>
+            
+                <hr/>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <vr/>
+        <div class="preview-container" id="preview-container">
+            <img id="video-thumbnail" src="" alt="Thumbnail" style="display: none;">
+            <h2 id="video-title">No Video Selected</h2>
+            <p id="video-views">Views: -</p>
+            <p id="video-duration">Duration: -</p>
+            
+            <video id="video-preview" controls style="width: 100%; display: none;">
+                <source id="video-source" src="" type="video/mp4">
+            </video>
+            <div id="video-controls" style="margin-top: 20px; display: none;">
+                <label for="video-version">Select Video Version:</label>
+                <select id="video-version" onchange="changeVideoVersion()">
+                    <option value="full">Full Video</option>
+                </select>
+                <br><br>
+                <div>
+                    <label for="aspect-ratio">Aspect Ratio:</label>
+                    <select id="aspect-ratio" onchange="adjustAspectRatio()">
+                        <option value="16:9">16:9</option>
+                        <option value="4:3">4:3</option>
+                        <option value="1:1">1:1</option>
+                    </select>
+                </div>
+                <div>
+                    <button onclick="saveTrimmedVideo()">Save Trimmed Video</button>
+                    <p id="recorded-time">Recorded Time: -</p>
+                </div>
+                <div>
+                    <label for="trim-start">Trim Start (seconds):</label>
+                    <input type="number" id="trim-start" value="0">
+                </div>
+                <div>
+                    <label for="trim-end">Trim End (seconds):</label>
+                    <input type="number" id="trim-end">
+                </div>
+                <button onclick="createTrimmedVideo()">Create Trimmed Video</button>
+            </div>
+        </div>
+
+        <div class="transcript-container" id="transcript-container" style="display: none;">
+            <h2>Transcript</h2>
+            <div id="transcript-content" style="max-height: 300px; overflow-y: auto; background: #f1f1f1; padding: 10px;"></div>
+            <button onclick="downloadTranscript()">Download Transcript</button>
+        </div>
+    </main>
+</body>
+</html>

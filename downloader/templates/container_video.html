@@ -1,0 +1,55 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Video Details
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="preview-container" id="preview-container">
+      <img id="video-thumbnail" src="" alt="Thumbnail" style="display: none;">
+      <h2 id="video-title">No Video Selected</h2>
+      <p id="video-views">Views: -</p>
+      <p id="video-duration">Duration: -</p>
+      <p>Return to <a href="/video-downloader/">Video Downloader</a></p>
+      
+      <video id="video-preview" controls style="width: 100%; display: none;">
+          <source id="video-source" src="" type="video/mp4">
+      </video>
+      <div id="video-controls" style="margin-top: 20px; display: none;">
+          <label for="video-version">Select Video Version:</label>
+          <select id="video-version" onchange="changeVideoVersion()">
+              <option value="full">Full Video</option>
+          </select>
+          <br><br>
+          <div>
+              <label for="aspect-ratio">Aspect Ratio:</label>
+              <select id="aspect-ratio" onchange="adjustAspectRatio()">
+                  <option value="16:9">16:9</option>
+                  <option value="4:3">4:3</option>
+                  <option value="1:1">1:1</option>
+              </select>
+          </div>
+          <div>
+              <button onclick="saveTrimmedVideo()">Save Trimmed Video</button>
+              <p id="recorded-time">Recorded Time: -</p>
+          </div>
+          <div>
+              <label for="trim-start">Trim Start (seconds):</label>
+              <input type="number" id="trim-start" value="0">
+          </div>
+          <div>
+              <label for="trim-end">Trim End (seconds):</label>
+              <input type="number" id="trim-end">
+          </div>
+          <button onclick="createTrimmedVideo()">Create Trimmed Video</button>
+      </div>
+    </div>
+
+    <div class="transcript-container" id="transcript-container" style="display: none;">
+        <h2>Transcript</h2>
+        <div id="transcript-content" style="max-height: 300px; overflow-y: auto; background: #f1f1f1; padding: 10px;"></div>
+        <button onclick="downloadTranscript()">Download Transcript</button>
+    </div>
+  </main>
+{% endblock %}
