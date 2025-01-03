@@ -39,26 +39,27 @@ header .logo {
 }
 
 header .logo img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 35px;
 }
 
 header nav {
     display: flex;
-    gap: 15px;
+    gap: 2px;
 }
 
 header nav a {
     text-decoration: none;
     color: #333;
+    padding: 5px;
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 header nav a:hover {
-    color: #0073e6;
+    text-decoration: none;
 }
 
 main {
@@ -68,6 +69,18 @@ main {
     align-items: flex-start;
     padding: 20px;
     gap: 20px;
+}
+
+header nav span {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 1px;
+    border-radius: 5px;
+    background-color: #e4e4e4a9;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
 .form-container {
@@ -177,7 +190,9 @@ button {
 
 .main-container {
     flex: 1;
-    max-width: 400px;
+    max-width: 700px;
+    min-width: 400px;
+    margin: 20px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -188,6 +203,8 @@ button {
     max-width: 100% !important; /* Make the image take up the full width of the container */
     height: auto; /* Maintain the aspect ratio */
     display: block; /* Remove unwanted bottom margin from inline images */
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .main-container iframe {

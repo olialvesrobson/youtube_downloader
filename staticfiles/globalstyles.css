@@ -38,21 +38,28 @@ header .logo {
     color: #333;
 }
 
+header .logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+}
+
 header nav {
     display: flex;
-    gap: 15px;
+    gap: 2px;
 }
 
 header nav a {
     text-decoration: none;
     color: #333;
+    padding: 5px;
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 header nav a:hover {
-    color: #0073e6;
+    text-decoration: none;
 }
 
 main {
@@ -62,6 +69,18 @@ main {
     align-items: flex-start;
     padding: 20px;
     gap: 20px;
+}
+
+header nav span {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 1px;
+    border-radius: 5px;
+    background-color: #e4e4e4a9;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
 .form-container {
@@ -99,7 +118,7 @@ main {
 
 .form-container input,
 .form-container select,
-.form-container button {
+button {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -156,7 +175,7 @@ main {
     color: #555;
 }
 
-.preview-container a {
+.preview-container button, a {
     display: inline-block;
     font-size: 1rem;
     color: #0073e6;
@@ -164,14 +183,16 @@ main {
     margin-top: 10px;
 }
 
-.preview-container a:hover {
+.preview-container button, a:hover {
     text-decoration: underline;
 }
 
 
 .main-container {
-    flex: 2;
-    max-width: 600px;
+    flex: 1;
+    max-width: 700px;
+    min-width: 400px;
+    margin: 20px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -179,8 +200,10 @@ main {
 }
 
 .main-container img {
-    max-width: 100%;
-    border-radius: 8px;
+    max-width: 100% !important; /* Make the image take up the full width of the container */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Remove unwanted bottom margin from inline images */
+    border-radius: 10px;
     margin-bottom: 15px;
 }
 
@@ -192,7 +215,7 @@ main {
     margin-bottom: 15px;
 }
 
-.main-container h1, h2 {
+.main-container h2 {
     font-size: 1.5rem;
     margin-bottom: 20px;
     color: #0073e6;
@@ -214,4 +237,17 @@ main {
 
 .main-container a:hover {
     text-decoration: underline;
+}
+
+.main-container button {
+    background-color: #0073e6;
+    color: #ffffff;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-container button:hover, a:hover {
+    background-color: #00b2b5;
 }
